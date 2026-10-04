@@ -1,0 +1,359 @@
+<!doctype html>
+<!--
+  Fuel Tracker — 개인정보 처리방침 / Privacy Policy
+
+  **이 문서는 앱의 실제 동작을 감사해서 썼다** (2026-09-24). 템플릿이 아니다.
+  확인한 사실:
+    · 네트워크 호출 0건 (`URLSession`·`URLRequest` 없음)
+    · 분석·추적 라이브러리 0개
+    · 저장은 전부 기기 안 `UserDefaults` (키 12개)
+    · 밖으로 나가는 건 StoreKit(Apple)과 구독 관리 링크뿐
+
+  **앱이 바뀌면 이 문서부터 다시 본다.** 네트워크 호출이 하나라도 생기면
+  "기기를 떠나지 않는다"가 거짓이 되고, 그건 심사 문제이자 법적 문제다.
+
+  호스팅: 이 파일 하나를 정적으로 올리면 된다. App Store Connect에는
+  그 URL을 적는다.
+-->
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fuel Tracker 개인정보 처리방침</title>
+<style>
+  :root {
+    --bg: #ffffff; --panel: #f7f5fb; --ink: #1c1730; --muted: #55496f;
+    --dim: #8a80a3; --line: #e2dcf0; --accent: #6a3fd6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #141220; --panel: #1d1a2c; --ink: #f1eefa; --muted: #b8afd0;
+      --dim: #7f769a; --line: #302b45; --accent: #a78bfa;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 16px/1.75 -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+          "Noto Sans KR", "Segoe UI", sans-serif;
+    -webkit-text-size-adjust: 100%;
+  }
+  main { max-width: 720px; margin: 0 auto; padding: 48px 24px 96px; }
+  h1 { font-size: 28px; line-height: 1.3; margin: 0 0 6px; letter-spacing: -0.02em; }
+  h2 {
+    font-size: 19px; margin: 44px 0 12px; padding-top: 22px;
+    border-top: 1px solid var(--line); letter-spacing: -0.01em;
+  }
+  h3 { font-size: 16px; margin: 24px 0 8px; }
+  p, li { color: var(--muted); }
+  strong { color: var(--ink); }
+  .lede { font-size: 15px; color: var(--dim); margin: 0 0 32px; }
+  .box {
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: 12px; padding: 16px 18px; margin: 20px 0;
+  }
+  .box p:first-child { margin-top: 0; }
+  .box p:last-child { margin-bottom: 0; }
+  .fill { color: #b4342b; font-weight: 700; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .fill { color: #ff8a7d; }
+  }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 15px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--ink); font-weight: 700; width: 34%; }
+  td { color: var(--muted); }
+  code { font-size: 0.92em; background: var(--panel); padding: 1px 5px; border-radius: 4px; }
+  a { color: var(--accent); }
+  .lang-sep { margin-top: 80px; padding-top: 40px; border-top: 3px solid var(--line); }
+  ul { padding-left: 20px; }
+  li { margin: 6px 0; }
+</style>
+</head>
+<body>
+<main>
+
+<h1>Fuel Tracker 개인정보 처리방침</h1>
+<p class="lede">
+  시행일 2026년 10월 1일
+</p>
+
+<div class="box">
+  <p><strong>먼저 한 줄로.</strong> Fuel Tracker는 사용자가 입력한 정보를
+  <strong>기기 밖으로 내보내지 않습니다.</strong> 서버가 없고, 개발자는
+  사용자가 입력한 어떤 내용도 받지 않습니다.</p>
+</div>
+
+<h2>1. 어떤 정보를 입력받나요</h2>
+
+<p>앱이 카페인 곡선을 계산하려면 몸에 관한 값이 필요합니다. 아래 항목을
+온보딩과 사용 중에 입력받습니다.</p>
+
+<table>
+  <tr><th>몸</th><td>체중, 나이, 키, 생물학적 성별, 체형</td></tr>
+  <tr><th>건강<br><span style="color:var(--dim);font-weight:400">(민감정보)</span></th>
+      <td>임신 여부, 수유 여부, 간 질환 여부, 심장·혈압 질환 여부,
+          복약 여부, 흡연 여부, 경구피임약 복용 여부</td></tr>
+  <tr><th>습관</th><td>자주 마시는 음료, 하루 섭취 잔 수, 취침·기상 시각, 섭취 목적</td></tr>
+  <tr><th>기록</th><td>무엇을 · 언제 · 몇 mg 마셨는지</td></tr>
+  <tr><th>체감</th><td>한 잔이 어느 정도로 느껴지는지, 시간이 지나며 어떻게 옅어지는지.
+          정밀 기록을 켜면 "지금 몇 % 느껴지는지"도 함께 저장됩니다.</td></tr>
+  <tr><th>이름</th><td><strong>선택입니다.</strong> 화면에 부르는 말로만 쓰고,
+          비워 두어도 앱은 그대로 동작합니다.</td></tr>
+  <tr><th>앱 설정</th><td>언어, 테마, 정밀 기록 켬/끔</td></tr>
+</table>
+
+<p><strong>건강 항목은 민감정보입니다.</strong> 그래서 앱은 이 항목들을
+<strong>모두 건너뛸 수 있게</strong> 만들어 두었습니다 — "답하지 않을래요"를
+고르면 그 값 없이 계산합니다.</p>
+
+<h2>2. 어디에 저장되나요</h2>
+
+<p><strong>입력한 정보는 전부 사용자의 기기 안에만 저장됩니다.</strong>
+iOS가 앱마다 따로 관리하는 저장 공간(<code>UserDefaults</code>)을 쓰며,
+다른 앱은 이 값을 읽을 수 없습니다.</p>
+
+<ul>
+  <li>개발자가 운영하는 <strong>서버가 없습니다.</strong></li>
+  <li>앱에는 데이터를 보내는 <strong>네트워크 기능이 들어 있지 않습니다.</strong></li>
+  <li>분석·통계·광고·추적 도구를 <strong>쓰지 않습니다.</strong></li>
+  <li>따라서 개발자는 사용자가 입력한 내용을 <strong>볼 수 없습니다.</strong></li>
+</ul>
+
+<h2>3. 무엇에 쓰나요</h2>
+
+<p>입력한 값은 <strong>오직 기기 안에서 계산하는 데만</strong> 쓰입니다.</p>
+
+<ul>
+  <li>지금 몸에 남은 카페인 양과 각성도를 추정</li>
+  <li>한 번·하루 권장량을 몸무게에 맞춰 계산</li>
+  <li>취침 시각에 남을 양을 예측해 수면 관련 안내를 표시</li>
+  <li>오늘의 기록과 앞으로 24시간의 곡선을 보여 주기</li>
+</ul>
+
+<div class="box">
+  <p><strong>이 앱은 의료기기가 아닙니다.</strong> 화면의 숫자는 일반적인
+  약동학 모델에서 나온 <strong>추정치</strong>이고, 질병의 진단·치료·예방을
+  위한 것이 아닙니다. 임신·수유 중이거나 간·심장·혈압 관련 질환이 있거나
+  약을 복용 중이라면 의료 전문가와 상의하세요.</p>
+</div>
+
+<h2>4. 얼마나 보관하나요</h2>
+
+<p>사용자가 지울 때까지입니다. 개발자가 보관하는 사본은 없습니다.</p>
+
+<ul>
+  <li><strong>설정 › 오늘 기록 비우기</strong> — 마신 기록만 지웁니다.</li>
+  <li><strong>설정 › 전부 지우기</strong> — 프로필·기록·설정을 모두 지우고
+      온보딩부터 다시 시작합니다. <strong>되돌릴 수 없습니다.</strong></li>
+  <li><strong>앱 삭제</strong> — iOS가 앱의 저장 공간을 통째로 지웁니다.
+      기기에서 앱을 지우면 입력한 정보도 함께 사라집니다.</li>
+</ul>
+
+<h2>5. 다른 곳에 제공하나요</h2>
+
+<p><strong>아니요.</strong> 제3자 제공, 처리 위탁, 국외 이전이 모두 없습니다.
+보낼 서버 자체가 없기 때문입니다.</p>
+
+<h3>결제는 Apple이 처리합니다</h3>
+
+<p>프리미엄 구독은 Apple의 앱 내 구입(In-App Purchase)으로만 이루어집니다.
+<strong>개발자는 카드번호·계좌 등 결제 정보를 받지도, 보지도, 저장하지도
+않습니다.</strong> 앱은 Apple에게 "이 사용자가 지금 구독 중인가"만 묻고,
+그 답(예/아니오)만 확인합니다.</p>
+
+<p>Apple이 결제 과정에서 처리하는 정보는 Apple의 정책을 따릅니다 —
+<a href="https://www.apple.com/legal/privacy/">Apple 개인정보 처리방침</a>.</p>
+
+<h2>6. 사용자의 권리</h2>
+
+<p>개인정보 보호법이 정한 열람·정정·삭제·처리정지 요구권이 있습니다.
+다만 이 앱은 <strong>입력한 정보가 사용자 기기에만 있으므로</strong>,
+다음 방법으로 직접 그리고 즉시 행사할 수 있습니다.</p>
+
+<ul>
+  <li><strong>열람·정정</strong> — 프로필 화면에서 언제든 보고 고칠 수 있습니다.</li>
+  <li><strong>삭제·처리정지</strong> — 설정의 "전부 지우기" 또는 앱 삭제.</li>
+</ul>
+
+<p>개발자에게 요청하실 일은 없지만, 이 방침에 관해 문의가 있으시면
+아래로 연락 주세요.</p>
+
+<h2>7. 안전하게 지키기 위한 조치</h2>
+
+<ul>
+  <li>수집·전송 경로를 <strong>만들지 않는 것</strong>이 가장 큰 조치입니다 —
+      나가지 않는 데이터는 새지 않습니다.</li>
+  <li>저장 공간은 iOS의 앱 샌드박스 안에 있어 다른 앱이 접근할 수 없습니다.</li>
+  <li>기기 자체의 보호는 iOS의 잠금·암호화에 따릅니다. 기기 잠금을 켜 두시길 권합니다.</li>
+</ul>
+
+<h2>8. 만 14세 미만 아동</h2>
+
+<p>이 앱은 <strong>만 14세 미만 아동을 대상으로 하지 않으며</strong>,
+아동의 개인정보를 의도적으로 수집하지 않습니다. 카페인 섭취 한계는
+성인 기준으로 계산되므로 아동·청소년에게는 적합하지 않습니다.</p>
+
+<h2>9. 방침이 바뀌면</h2>
+
+<p>앱의 동작이 바뀌어 이 방침을 고쳐야 할 때는 이 페이지를 갱신하고
+시행일을 다시 적습니다. <strong>데이터가 기기를 벗어나는 변경이 생기면
+앱 안에서 먼저 알리고 동의를 받습니다.</strong></p>
+
+<h2>10. 문의</h2>
+
+<table>
+  <tr><th>앱 이름</th><td>Fuel Tracker</td></tr>
+  <tr><th>개발자</th><td>조우석 (Fuel Tracker)</td></tr>
+  <tr><th>개인정보 보호책임자</th><td>조우석</td></tr>
+  <tr><th>이메일</th><td><a href="mailto:wscho1009@gmail.com">wscho1009@gmail.com</a></td></tr>
+</table>
+
+<div class="box">
+  <p style="color:var(--dim);font-size:14px;margin:0">
+  개인정보 분쟁이 있을 때는 개인정보분쟁조정위원회(1833-6972),
+  개인정보침해신고센터(118), 대검찰청 사이버수사과(1301),
+  경찰청 사이버수사국(182)에 도움을 요청하실 수 있습니다.</p>
+</div>
+
+
+<!-- ─────────────────────────────────────────────── -->
+<div class="lang-sep" lang="en">
+
+<h1>Fuel Tracker Privacy Policy</h1>
+<p class="lede">
+  Effective October 1, 2026
+</p>
+
+<div class="box">
+  <p><strong>In one line.</strong> Fuel Tracker does not send what you enter
+  off your device. There is no server, and the developer never receives
+  anything you type into the app.</p>
+</div>
+
+<h2>1. What the app asks for</h2>
+
+<p>To model a caffeine curve, the app needs some facts about your body.
+It asks for the following during onboarding and while you use it.</p>
+
+<table>
+  <tr><th>Body</th><td>Weight, age, height, biological sex, build</td></tr>
+  <tr><th>Health<br><span style="color:var(--dim);font-weight:400">(sensitive)</span></th>
+      <td>Pregnancy, breastfeeding, liver condition, heart or blood-pressure
+          condition, whether you take medication, smoking, oral contraceptive use</td></tr>
+  <tr><th>Habits</th><td>Drinks you have often, cups per day, bedtime and wake time, why you drink it</td></tr>
+  <tr><th>Log</th><td>What you drank, when, and how many mg</td></tr>
+  <tr><th>How it feels</th><td>How strong one cup feels and how it fades.
+          With detailed logging on, "how much do you feel right now" is saved too.</td></tr>
+  <tr><th>Name</th><td><strong>Optional.</strong> Used only as a greeting on screen;
+          the app works the same if you leave it blank.</td></tr>
+  <tr><th>App settings</th><td>Language, theme, detailed logging on/off</td></tr>
+</table>
+
+<p><strong>The health answers are sensitive data.</strong> Every one of them
+can be skipped — choosing "I'd rather not say" leaves that value out of
+the calculation.</p>
+
+<h2>2. Where it is stored</h2>
+
+<p><strong>Everything you enter stays on your device.</strong> It is kept in
+the per-app storage iOS provides (<code>UserDefaults</code>), which other
+apps cannot read.</p>
+
+<ul>
+  <li>There is <strong>no server</strong> operated by the developer.</li>
+  <li>The app contains <strong>no networking code</strong> that sends your data anywhere.</li>
+  <li>It uses <strong>no analytics, advertising, or tracking</strong> tools.</li>
+  <li>As a result, the developer <strong>cannot see</strong> anything you enter.</li>
+</ul>
+
+<h2>3. What it is used for</h2>
+
+<p>Only to compute, on your device:</p>
+
+<ul>
+  <li>An estimate of the caffeine left in your body and how awake it is keeping you</li>
+  <li>Per-serving and daily guidance scaled to your body weight</li>
+  <li>How much is likely to remain at bedtime, and a sleep note based on that</li>
+  <li>Today's log and the next 24 hours of the curve</li>
+</ul>
+
+<div class="box">
+  <p><strong>This app is not a medical device.</strong> The numbers on screen
+  are <strong>estimates</strong> from a general pharmacokinetic model and are
+  not intended to diagnose, treat, or prevent any condition. If you are
+  pregnant or breastfeeding, have a liver, heart, or blood-pressure condition,
+  or take any medication, talk to a healthcare professional.</p>
+</div>
+
+<h2>4. How long it is kept</h2>
+
+<p>Until you delete it. The developer holds no copy.</p>
+
+<ul>
+  <li><strong>Settings › Clear today's log</strong> — removes logged drinks only.</li>
+  <li><strong>Settings › Erase everything</strong> — removes your profile, log,
+      and settings, and returns you to onboarding. <strong>This cannot be undone.</strong></li>
+  <li><strong>Delete the app</strong> — iOS removes the app's storage with it.</li>
+</ul>
+
+<h2>5. Sharing</h2>
+
+<p><strong>None.</strong> No third-party sharing, no processors, no
+international transfers — there is no server to send anything to.</p>
+
+<h3>Payments are handled by Apple</h3>
+
+<p>Premium is sold only through Apple's In-App Purchase.
+<strong>The developer never receives, sees, or stores card or account
+details.</strong> The app only asks Apple whether this account currently has
+an active subscription, and reads the yes/no answer.</p>
+
+<p>What Apple processes during payment is governed by
+<a href="https://www.apple.com/legal/privacy/">Apple's Privacy Policy</a>.</p>
+
+<h2>6. Your rights</h2>
+
+<p>You have the right to access, correct, delete, and restrict processing of
+your personal data. Because everything lives on your device, you can exercise
+these yourself, immediately:</p>
+
+<ul>
+  <li><strong>Access and correction</strong> — view and edit any value on the Profile screen.</li>
+  <li><strong>Deletion and restriction</strong> — "Erase everything" in Settings, or delete the app.</li>
+</ul>
+
+<h2>7. Safeguards</h2>
+
+<ul>
+  <li>The strongest safeguard is <strong>not building a collection path</strong> —
+      data that never leaves cannot leak.</li>
+  <li>Storage sits inside the iOS app sandbox, which other apps cannot reach.</li>
+  <li>Protection of the device itself relies on iOS lock and encryption.
+      Keeping a device passcode enabled is recommended.</li>
+</ul>
+
+<h2>8. Children</h2>
+
+<p>This app is <strong>not directed to children under 14</strong> and does not
+knowingly collect their personal data. Caffeine limits here are calculated on
+an adult basis and are not appropriate for children or adolescents.</p>
+
+<h2>9. Changes</h2>
+
+<p>If the app changes in a way that makes this policy inaccurate, this page is
+updated and the effective date changed. <strong>If data ever begins to leave
+the device, the app will say so and ask for consent first.</strong></p>
+
+<h2>10. Contact</h2>
+
+<table>
+  <tr><th>App</th><td>Fuel Tracker</td></tr>
+  <tr><th>Developer</th><td>Wooseok Cho (Fuel Tracker)</td></tr>
+  <tr><th>Privacy officer</th><td>Wooseok Cho</td></tr>
+  <tr><th>Email</th><td><a href="mailto:wscho1009@gmail.com">wscho1009@gmail.com</a></td></tr>
+</table>
+
+</div>
+</main>
+</body>
+</html>
