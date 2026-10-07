@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Caffeine Calculator — How much is left at bedtime? · Fuel Tracker</title>
+<meta name="description" content="Free caffeine half-life calculator. Add your coffee, tea or energy drinks and see how many milligrams of caffeine will still be in your body when you go to bed.">
+<meta name="apple-itunes-app" content="app-id=6818583602">
+<link rel="icon" href="assets/favicon-64.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta property="og:title" content="How much caffeine will be left at bedtime?">
+<meta property="og:description" content="Free caffeine half-life calculator by Fuel Tracker.">
+<meta property="og:image" content="https://wscho1009.github.io/Fuel-tracker/assets/icon-256.png">
+<style>
+  :root {
+    --bg:#F1EDFB; --panel:#FFFFFF; --panel2:#F7F4FE; --line:#CFC2F0; --lip:#D7CBF3;
+    --ink:#241A3F; --muted:#5E4E86; --dim:#9C8EC4; --accent:#8B5CF6; --accentLip:#6A3FD6;
+    --orange:#FF8A3D; --red:#D9443A; --green:#2E9E6B;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg:#15111F; --panel:#241E36; --panel2:#2F2749; --line:#4A3E70; --lip:#16112A;
+      --ink:#F3EFFF; --muted:#B9AADD; --dim:#7E71A6; --accent:#A78BFA; --accentLip:#6A3FD6;
+      --red:#FF7A6E; --green:#5FD39A;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin:0; background:var(--bg); color:var(--ink);
+    font:16px/1.6 ui-rounded, "SF Pro Rounded", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", sans-serif; }
+  main { max-width:680px; margin:0 auto; padding:28px 16px 80px; }
+  nav { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:28px; }
+  nav a.brand { display:flex; align-items:center; gap:10px; color:var(--ink); text-decoration:none; font-weight:800; }
+  nav img { width:36px; height:36px; border-radius:9px; }
+  .lang { display:flex; gap:4px; }
+  .lang button { border:1px solid var(--line); background:var(--panel); color:var(--muted); border-radius:999px; padding:4px 12px; font:inherit; font-size:14px; cursor:pointer; }
+  .lang button[aria-pressed="true"] { background:var(--accent); color:#fff; border-color:var(--accent); }
+  h1 { font-size:34px; line-height:1.15; letter-spacing:-0.02em; margin:0 0 10px; font-weight:900; }
+  .lede { color:var(--muted); margin:0 0 24px; }
+  .card { background:var(--panel); border:2px solid var(--line); border-radius:24px; padding:18px; margin:16px 0;
+    box-shadow:0 5px 0 var(--lip); }
+  .card h2 { font-size:15px; letter-spacing:.08em; text-transform:uppercase; color:var(--dim); margin:0 0 12px; }
+  .row { display:grid; grid-template-columns: 1fr 96px 112px 40px; gap:8px; align-items:center; margin-bottom:8px; }
+  select, input { width:100%; font:inherit; color:var(--ink); background:var(--panel2); border:1.5px solid var(--line);
+    border-radius:12px; padding:9px 10px; min-width:0; }
+  input[type=number] { text-align:right; }
+  .x { border:none; background:var(--panel2); color:var(--muted); border-radius:50%; width:36px; height:36px; font-size:18px; cursor:pointer; }
+  .add { border:2px dashed var(--line); background:transparent; color:var(--muted); border-radius:14px; width:100%; padding:10px; font:inherit; font-weight:700; cursor:pointer; margin-top:4px; }
+  .labels { display:grid; grid-template-columns: 1fr 96px 112px 40px; gap:8px; font-size:12px; color:var(--dim); margin-bottom:4px; padding:0 2px; }
+  .bed { display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+  .bed label { font-weight:700; }
+  .bed input { width:140px; }
+  .seg { display:flex; gap:6px; flex-wrap:wrap; margin-top:12px; }
+  .seg button { flex:1; min-width:90px; border:1.5px solid var(--line); background:var(--panel2); color:var(--muted); border-radius:12px; padding:8px; font:inherit; font-size:14px; cursor:pointer; }
+  .seg button[aria-pressed="true"] { border-color:var(--accent); color:var(--ink); font-weight:800; background:var(--panel); }
+  .hint { font-size:13px; color:var(--dim); margin:8px 0 0; }
+  .stats { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; text-align:center; }
+  .stats div { padding:4px; }
+  .stats small { display:block; color:var(--dim); font-size:13px; }
+  .stats b { font-size:26px; font-variant-numeric:tabular-nums; }
+  .stats b span { font-size:14px; color:var(--muted); font-weight:600; margin-left:2px; }
+  .outlook { font-size:18px !important; line-height:1.3; display:block; padding-top:6px; }
+  svg { width:100%; height:auto; display:block; margin-top:12px; }
+  .cta { display:flex; gap:14px; align-items:center; background:var(--accent); color:#fff; border-radius:24px; padding:18px; text-decoration:none; box-shadow:0 5px 0 var(--accentLip); margin:24px 0; }
+  .cta img { width:56px; height:56px; border-radius:14px; flex:none; }
+  .cta b { display:block; font-size:18px; }
+  .cta span { opacity:.9; font-size:14px; }
+  .fine { font-size:13px; color:var(--dim); }
+  .fine a { color:var(--muted); }
+  @media (max-width:520px) {
+    .labels { display:none; }
+    .row { grid-template-columns: 1fr 1fr 36px; padding-bottom:10px; border-bottom:1px solid var(--line); margin-bottom:10px; }
+    .row select { grid-column: 1 / -1; }
+    h1 { font-size:28px; }
+    .stats { grid-template-columns:1fr 1fr; }
+    .stats div:last-child { grid-column: 1 / -1; border-top:1px solid var(--line); padding-top:10px; }
+    .seg button { min-width:0; font-size:13px; padding:8px 4px; }
+  }
+</style>
+</head>
+<body>
+<main>
+<nav>
+  <a class="brand" href="./"><img src="assets/icon-256.png" alt="">Fuel Tracker</a>
+  <div class="lang"><button data-l="en">EN</button><button data-l="ko">한국어</button></div>
+</nav>
+
+<h1 data-t="h1"></h1>
+<p class="lede" data-t="lede"></p>
+
+<section class="card">
+  <h2 data-t="drinks"></h2>
+  <div class="labels"><span data-t="colDrink"></span><span data-t="colMg"></span><span data-t="colTime"></span><span></span></div>
+  <div id="rows"></div>
+  <button class="add" id="add" data-t="add"></button>
+</section>
+
+<section class="card">
+  <div class="bed"><label for="bed" data-t="bedtime"></label><input type="time" id="bed" value="23:00"></div>
+  <div class="seg" id="speed">
+    <button data-hl="3" data-t="fast"></button>
+    <button data-hl="5" data-t="typical"></button>
+    <button data-hl="8" data-t="slow"></button>
+  </div>
+  <p class="hint" data-t="speedHint"></p>
+</section>
+
+<section class="card" aria-live="polite">
+  <div class="stats">
+    <div><small data-t="now"></small><b id="sNow">0<span>mg</span></b></div>
+    <div><small data-t="atBed"></small><b id="sBed">0<span>mg</span></b></div>
+    <div><small data-t="sleep"></small><b id="sOut" class="outlook">—</b></div>
+  </div>
+  <svg id="chart" viewBox="0 0 640 220" role="img"></svg>
+</section>
+
+<a class="cta" id="cta" href="https://apps.apple.com/app/id6818583602">
+  <img src="assets/icon-256.png" alt="">
+  <div><b data-t="ctaTitle"></b><span data-t="ctaSub"></span></div>
+</a>
+
+<p class="fine" data-t="fine"></p>
+<p class="fine"><a href="./" data-t="home"></a> · <a href="privacy.html" data-t="privacy"></a> · <a href="support.html" data-t="support"></a></p>
+</main>
+
+<script>
+// 앱 엔진(Core/CaffeineEngine.swift)과 같은 모델: 1구획 경구 흡수 + 1차 소실.
+// 음료 흡수 반감기 0.12h, 기본 소실 반감기 5h, 수면 구간 65mg / 200mg.
+const T = {
+  en: {
+    h1:"How much caffeine will be left at bedtime?",
+    lede:"Add what you drank today. See how many milligrams are still in your body now — and when you go to sleep.",
+    drinks:"Today's drinks", colDrink:"Drink", colMg:"mg", colTime:"Time", add:"+ Add a drink",
+    bedtime:"Bedtime", fast:"Fast · 3h", typical:"Typical · 5h", slow:"Slow · 8h",
+    speedHint:"Caffeine half-life. About 5 hours for most adults; it runs longer with pregnancy, oral contraceptives or liver conditions, and shorter for smokers.",
+    now:"In you now", atBed:"Left at bedtime", sleep:"Sleep outlook",
+    o0:"No effect expected", o1:"Should be fine", o2:"May be a bit restless", o3:"May be hard to fall asleep",
+    ctaTitle:"Track it automatically", ctaSub:"Fuel Tracker for iPhone: one-tap logging, a live gauge and a home screen widget.",
+    fine:"Estimates from a general pharmacokinetic model, not medical advice. Caffeine content varies by product and preparation. Nothing you enter here leaves this page.",
+    home:"Home", privacy:"Privacy", support:"Support", now_lbl:"Now", bed_lbl:"Bedtime", custom:"Custom",
+    d:{drip:"Drip coffee 8oz", black12:"Black coffee 12oz", espresso:"Espresso, 1 shot", cold:"Cold brew 16oz", energy:"Energy drink 16oz", blacktea:"Black tea 8oz", greentea:"Green tea 8oz", cola:"Cola 12oz", preworkout:"Pre-workout, 1 scoop"}
+  },
+  ko: {
+    h1:"잠들 때 카페인이 얼마나 남을까?",
+    lede:"오늘 마신 걸 넣어 보세요. 지금 몸에 남은 카페인과 잠자리에 들 때 남을 양을 mg으로 보여드려요.",
+    drinks:"오늘 마신 것", colDrink:"음료", colMg:"mg", colTime:"시각", add:"+ 음료 추가",
+    bedtime:"취침 시각", fast:"빠름 · 3시간", typical:"보통 · 5시간", slow:"느림 · 8시간",
+    speedHint:"카페인 반감기예요. 성인은 보통 5시간 안팎이고, 임신·경구피임약·간 질환이 있으면 길어지고 흡연하면 짧아져요.",
+    now:"지금 몸에", atBed:"취침 시 남을 양", sleep:"수면 예보",
+    o0:"영향 없을 예정", o1:"양호할 예정", o2:"조금 뒤척일 수 있어요", o3:"잠들기 힘들 수 있어요",
+    ctaTitle:"자동으로 기록하려면", ctaSub:"iPhone 앱 Fuel Tracker: 한 번 탭 기록, 실시간 계기판, 홈 화면 위젯.",
+    fine:"일반적인 약동학 모델로 계산한 추정치이며 의료 조언이 아니에요. 카페인 함량은 제품과 추출 방식에 따라 달라요. 여기에 입력한 내용은 이 페이지 밖으로 나가지 않아요.",
+    home:"홈", privacy:"개인정보 처리방침", support:"고객지원", now_lbl:"지금", bed_lbl:"취침", custom:"직접 입력",
+    d:{drip:"드립 커피 8oz", black12:"블랙커피 12oz", espresso:"에스프레소 1샷", cold:"콜드브루 16oz", energy:"에너지드링크 16oz", blacktea:"홍차 8oz", greentea:"녹차 8oz", cola:"콜라 12oz", preworkout:"프리워크아웃 1스쿱"}
+  }
+};
+// 대표값(브랜드 아님). 앱 카탈로그의 블랙커피 12oz 140 · 드립 8oz 95와 맞춘다.
+const DRINKS = [["drip",95],["black12",140],["espresso",63],["cold",200],["energy",160],["blacktea",47],["greentea",28],["cola",34],["preworkout",200]];
+const KA = Math.LN2/0.12, LAG = 0.1;
+let lang = (new URLSearchParams(location.search).get("lang")) || ((navigator.language||"").startsWith("ko") ? "ko" : "en");
+let hl = 5;
+const rows = document.getElementById("rows");
+
+function hhmm(d){ return String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0"); }
+function addRow(key="drip", mg=95, time){
+  const r = document.createElement("div"); r.className="row";
+  r.innerHTML = `<select></select><input type="number" min="0" max="1000" step="5" inputmode="numeric" aria-label="mg"><input type="time" aria-label="time"><button class="x" aria-label="remove">×</button>`;
+  const [sel, num, tm, x] = r.children;
+  sel.dataset.key = key; num.value = mg; tm.value = time || hhmm(new Date(Date.now()-60*60*1000));
+  sel.onchange = () => { const f = DRINKS.find(d=>d[0]===sel.value); if (f) num.value = f[1]; sel.dataset.key = sel.value; calc(); };
+  num.oninput = () => { const f = DRINKS.find(d=>d[0]===sel.value); if (f && +num.value !== f[1]) { sel.value="custom"; sel.dataset.key="custom"; } calc(); };
+  tm.oninput = calc; x.onclick = () => { r.remove(); calc(); };
+  rows.appendChild(r); fillSelect(sel);
+}
+function fillSelect(sel){
+  const k = sel.dataset.key;
+  sel.innerHTML = DRINKS.map(([id])=>`<option value="${id}">${T[lang].d[id]}</option>`).join("") + `<option value="custom">${T[lang].custom}</option>`;
+  sel.value = k;
+}
+// 시각 문자열 → 지금 기준 시간(h). 지금보다 늦은 시각은 어제가 아니라 오늘 이후로 본다(취침은 앞, 음료는 뒤).
+function hoursFromNow(str, future){
+  const [h,m] = str.split(":").map(Number); const now = new Date(); const t = new Date(now); t.setHours(h,m,0,0);
+  let d = (t-now)/3.6e6;
+  if (future && d < 0) d += 24;
+  if (!future && d > 0.25) d -= 24;
+  return d;
+}
+function amount(dose, dt, ke){
+  const t = dt - LAG; if (t <= 0) return dt > 0 || dt > -1e-9 ? dose : 0; // 아직 안 마신 잔은 0
+  const active = Math.abs(KA-ke)<1e-9 ? dose*KA*t*Math.exp(-KA*t) : dose*(KA/(KA-ke))*(Math.exp(-ke*t)-Math.exp(-KA*t));
+  return dose*Math.exp(-KA*t) + active;
+}
+function totalAt(h, list, ke){ return list.reduce((s,[dose,t0]) => s + (h < t0 ? 0 : amount(dose, h-t0, ke)), 0); }
+function outlook(mg){ const o=T[lang]; return mg < 5 ? [o.o0,"var(--green)"] : mg < 65 ? [o.o1,"var(--green)"] : mg < 200 ? [o.o2,"var(--orange)"] : [o.o3,"var(--red)"]; }
+
+function calc(){
+  const ke = Math.LN2/hl;
+  const list = [...rows.children].map(r => [Math.max(0, +r.children[1].value||0), hoursFromNow(r.children[2].value||"00:00", false)]);
+  const bed = hoursFromNow(document.getElementById("bed").value||"23:00", true);
+  const now = totalAt(0, list, ke), atBed = totalAt(bed, list, ke);
+  document.getElementById("sNow").innerHTML = Math.round(now)+"<span>mg</span>";
+  document.getElementById("sBed").innerHTML = Math.round(atBed)+"<span>mg</span>";
+  const [txt,col] = outlook(atBed); const so = document.getElementById("sOut"); so.textContent = txt; so.style.color = col;
+  draw(list, ke, bed);
+}
+function draw(list, ke, bed){
+  const start = Math.min(-2, ...list.map(d=>d[1])) , end = Math.max(bed+2, 4);
+  const W=640,H=220,P=34, xs=h=>P+(h-start)/(end-start)*(W-2*P);
+  const pts=[]; let max=60;
+  for (let i=0;i<=160;i++){ const h=start+(end-start)*i/160; const v=totalAt(h,list,ke); pts.push([h,v]); if(v>max) max=v; }
+  max*=1.15; const ys=v=>H-P-(v/max)*(H-2*P);
+  const line = pts.map(([h,v],i)=>(i?"L":"M")+xs(h).toFixed(1)+" "+ys(v).toFixed(1)).join(" ");
+  const area = line+` L${xs(end).toFixed(1)} ${H-P} L${xs(start).toFixed(1)} ${H-P} Z`;
+  const o=T[lang]; const y65=ys(65);
+  document.getElementById("chart").innerHTML = `
+    <defs><linearGradient id="g" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="var(--orange)" stop-opacity=".35"/><stop offset="1" stop-color="var(--orange)" stop-opacity="0"/></linearGradient></defs>
+    <line x1="${P}" x2="${W-P}" y1="${H-P}" y2="${H-P}" stroke="var(--line)" stroke-width="2"/>
+    ${65<max?`<line x1="${P}" x2="${W-P}" y1="${y65}" y2="${y65}" stroke="var(--dim)" stroke-dasharray="4 6"/><text x="${W-P}" y="${y65-6}" text-anchor="end" font-size="17" fill="var(--dim)">65mg</text>`:""}
+    <path d="${area}" fill="url(#g)"/><path d="${line}" fill="none" stroke="var(--orange)" stroke-width="3.5" stroke-linejoin="round"/>
+    <line x1="${xs(0)}" x2="${xs(0)}" y1="${P-6}" y2="${H-P}" stroke="var(--muted)" stroke-width="1.5"/>
+    <text x="${xs(0)}" y="${H-8}" text-anchor="middle" font-size="18" font-weight="700" fill="var(--ink)">${o.now_lbl}</text>
+    <line x1="${xs(bed)}" x2="${xs(bed)}" y1="${P-6}" y2="${H-P}" stroke="var(--accent)" stroke-width="2" stroke-dasharray="3 4"/>
+    <circle cx="${xs(bed)}" cy="${ys(totalAt(bed,list,ke))}" r="6" fill="var(--accent)"/>
+    <text x="${xs(bed)}" y="${H-8}" text-anchor="middle" font-size="18" font-weight="700" fill="var(--accent)">${o.bed_lbl}</text>`;
+}
+function setLang(l){
+  lang = l; document.documentElement.lang = l;
+  document.querySelectorAll("[data-t]").forEach(e => e.textContent = T[l][e.dataset.t]);
+  document.querySelectorAll(".lang button").forEach(b => b.setAttribute("aria-pressed", b.dataset.l===l));
+  document.querySelectorAll("#rows select").forEach(fillSelect);
+  document.title = l==="ko" ? "카페인 계산기 — 잠들 때 얼마나 남을까 · Fuel Tracker" : "Caffeine Calculator — How much is left at bedtime? · Fuel Tracker";
+  calc();
+}
+document.querySelectorAll(".lang button").forEach(b => b.onclick = () => setLang(b.dataset.l));
+document.querySelectorAll("#speed button").forEach(b => { b.setAttribute("aria-pressed", +b.dataset.hl===hl); b.onclick = () => { hl=+b.dataset.hl; document.querySelectorAll("#speed button").forEach(x=>x.setAttribute("aria-pressed", x===b)); calc(); }; });
+document.getElementById("add").onclick = () => { addRow("drip",95,hhmm(new Date())); calc(); };
+document.getElementById("bed").oninput = calc;
+const n = new Date(); const a = new Date(n-4*3.6e6), b = new Date(n-1*3.6e6);
+addRow("black12",140,hhmm(a)); addRow("energy",160,hhmm(b));
+setLang(lang);
+</script>
+</body>
+</html>
