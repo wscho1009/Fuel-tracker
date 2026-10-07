@@ -4,8 +4,9 @@
 
   **이 문서는 앱의 실제 동작을 감사해서 썼다** (2026-09-24). 템플릿이 아니다.
   확인한 사실:
-    · 네트워크 호출 0건 (`URLSession`·`URLRequest` 없음)
-    · 분석·추적 라이브러리 0개
+    · 네트워크 호출: RevenueCat SDK 하나 (2026-10-06 추가, 구독 관리·매출 통계)
+      — 익명 ID·기기/앱 정보·IP·구매 내역만 보낸다. 사용자 입력값은 보내지 않는다.
+    · 분석·추적 라이브러리 0개 (RevenueCat은 추적에 쓰지 않음)
     · 저장은 전부 기기 안 `UserDefaults` (키 12개)
     · 밖으로 나가는 건 StoreKit(Apple)과 구독 관리 링크뿐
 
@@ -74,13 +75,13 @@
 
 <h1>Fuel Tracker 개인정보 처리방침</h1>
 <p class="lede">
-  시행일 2026년 10월 1일
+  시행일 2026년 10월 6일
 </p>
 
 <div class="box">
-  <p><strong>먼저 한 줄로.</strong> Fuel Tracker는 사용자가 입력한 정보를
-  <strong>기기 밖으로 내보내지 않습니다.</strong> 서버가 없고, 개발자는
-  사용자가 입력한 어떤 내용도 받지 않습니다.</p>
+  <p><strong>먼저 한 줄로.</strong> Fuel Tracker는 사용자가 입력한 정보(몸·건강·마신 기록 등)를
+  <strong>기기 밖으로 내보내지 않습니다.</strong> 다만 구독을 관리하기 위해
+  <strong>익명 식별자와 구매 기록</strong>만 구독 관리 서비스 RevenueCat(미국)으로 전송됩니다.</p>
 </div>
 
 <h2>1. 어떤 정보를 입력받나요</h2>
@@ -114,8 +115,9 @@ iOS가 앱마다 따로 관리하는 저장 공간(<code>UserDefaults</code>)을
 
 <ul>
   <li>개발자가 운영하는 <strong>서버가 없습니다.</strong></li>
-  <li>앱에는 데이터를 보내는 <strong>네트워크 기능이 들어 있지 않습니다.</strong></li>
-  <li>분석·통계·광고·추적 도구를 <strong>쓰지 않습니다.</strong></li>
+  <li>앱이 인터넷으로 보내는 것은 <strong>구독 관리 도구(RevenueCat) 하나뿐</strong>이며,
+      사용자가 입력한 정보는 보내지 않습니다(아래 5번 참고).</li>
+  <li>광고·추적 도구를 <strong>쓰지 않습니다.</strong></li>
   <li>따라서 개발자는 사용자가 입력한 내용을 <strong>볼 수 없습니다.</strong></li>
 </ul>
 
@@ -142,17 +144,34 @@ iOS가 앱마다 따로 관리하는 저장 공간(<code>UserDefaults</code>)을
 <p>사용자가 지울 때까지입니다. 개발자가 보관하는 사본은 없습니다.</p>
 
 <ul>
-  <li><strong>설정 › 오늘 기록 비우기</strong> — 마신 기록만 지웁니다.</li>
-  <li><strong>설정 › 전부 지우기</strong> — 프로필·기록·설정을 모두 지우고
-      온보딩부터 다시 시작합니다. <strong>되돌릴 수 없습니다.</strong></li>
+  <li><strong>설정 › 기록 비우기</strong> — 마신 기록을 전부 지웁니다. 프로필은 그대로 남습니다.</li>
+  <li><strong>설정 › 전부 지우기</strong> — 프로필·기록·정밀 기록을 모두 지우고
+      온보딩부터 다시 시작합니다. 언어와 테마 선택만 남습니다. <strong>되돌릴 수 없습니다.</strong></li>
   <li><strong>앱 삭제</strong> — iOS가 앱의 저장 공간을 통째로 지웁니다.
       기기에서 앱을 지우면 입력한 정보도 함께 사라집니다.</li>
 </ul>
 
 <h2>5. 다른 곳에 제공하나요</h2>
 
-<p><strong>아니요.</strong> 제3자 제공, 처리 위탁, 국외 이전이 모두 없습니다.
-보낼 서버 자체가 없기 때문입니다.</p>
+<p><strong>사용자가 입력한 정보는 누구에게도 제공하지 않습니다.</strong>
+제3자 제공은 없습니다. 다만 구독 관리를 위해 아래와 같이 <strong>처리를 위탁하며,
+이에 따라 정보가 국외(미국)로 이전</strong>됩니다.</p>
+
+<h3>처리 위탁 및 국외 이전</h3>
+
+<table>
+  <tr><th>받는 자</th><td>RevenueCat, Inc. (privacy@revenuecat.com)</td></tr>
+  <tr><th>이전 국가</th><td>미국</td></tr>
+  <tr><th>이전 항목</th><td>앱이 만든 익명 식별자, 기기·앱 정보(iOS 버전, 앱 버전, 국가·언어 설정), IP 주소,
+      구매 내역(상품, 가격, 통화, 구매 시각, 거래 번호)</td></tr>
+  <tr><th>목적</th><td>구독 상태 확인, 구매 기록 관리, 매출 통계</td></tr>
+  <tr><th>이전 시점과 방법</th><td>앱 실행 시와 구독 구매·갱신 시, 암호화된 인터넷 통신(HTTPS)으로 전송</td></tr>
+  <tr><th>보관 기간</th><td>서비스 이용 기간 동안 보관하며, 삭제를 요청하면 지체 없이 파기합니다.</td></tr>
+</table>
+
+<p>체중·건강 정보·마신 기록·이름 등 <strong>사용자가 입력한 정보는 이전 항목에 포함되지 않습니다.</strong>
+이전을 원하지 않으시면 앱을 사용하지 않거나 삭제하실 수 있습니다.
+RevenueCat의 처리는 <a href="https://www.revenuecat.com/privacy/">RevenueCat 개인정보 처리방침</a>을 따릅니다.</p>
 
 <h3>결제는 Apple이 처리합니다</h3>
 
@@ -175,14 +194,17 @@ iOS가 앱마다 따로 관리하는 저장 공간(<code>UserDefaults</code>)을
   <li><strong>삭제·처리정지</strong> — 설정의 "전부 지우기" 또는 앱 삭제.</li>
 </ul>
 
-<p>개발자에게 요청하실 일은 없지만, 이 방침에 관해 문의가 있으시면
-아래로 연락 주세요.</p>
+<p>RevenueCat으로 전송된 익명 식별자·구매 기록의 열람이나 삭제를 원하시면
+아래 이메일로 요청해 주세요. 확인 후 지체 없이 처리합니다.
+이 방침에 관한 다른 문의도 같은 곳으로 연락 주세요.</p>
 
 <h2>7. 안전하게 지키기 위한 조치</h2>
 
 <ul>
-  <li>수집·전송 경로를 <strong>만들지 않는 것</strong>이 가장 큰 조치입니다 —
+  <li>사용자가 입력한 정보는 <strong>전송 경로를 만들지 않는 것</strong>이 가장 큰 조치입니다 —
       나가지 않는 데이터는 새지 않습니다.</li>
+  <li>RevenueCat으로 보내는 정보는 최소한(익명 식별자·구매 기록)으로 한정하고,
+      암호화된 통신(HTTPS)으로만 전송합니다.</li>
   <li>저장 공간은 iOS의 앱 샌드박스 안에 있어 다른 앱이 접근할 수 없습니다.</li>
   <li>기기 자체의 보호는 iOS의 잠금·암호화에 따릅니다. 기기 잠금을 켜 두시길 권합니다.</li>
 </ul>
@@ -196,7 +218,7 @@ iOS가 앱마다 따로 관리하는 저장 공간(<code>UserDefaults</code>)을
 <h2>9. 방침이 바뀌면</h2>
 
 <p>앱의 동작이 바뀌어 이 방침을 고쳐야 할 때는 이 페이지를 갱신하고
-시행일을 다시 적습니다. <strong>데이터가 기기를 벗어나는 변경이 생기면
+시행일을 다시 적습니다. <strong>사용자가 입력한 정보가 기기를 벗어나는 변경이 생기면
 앱 안에서 먼저 알리고 동의를 받습니다.</strong></p>
 
 <h2>10. 문의</h2>
@@ -221,13 +243,14 @@ iOS가 앱마다 따로 관리하는 저장 공간(<code>UserDefaults</code>)을
 
 <h1>Fuel Tracker Privacy Policy</h1>
 <p class="lede">
-  Effective October 1, 2026
+  Effective October 6, 2026
 </p>
 
 <div class="box">
   <p><strong>In one line.</strong> Fuel Tracker does not send what you enter
-  off your device. There is no server, and the developer never receives
-  anything you type into the app.</p>
+  (body, health, drink log, and so on) off your device. To manage subscriptions,
+  only <strong>an anonymous identifier and purchase records</strong> are sent to the
+  subscription service RevenueCat (United States).</p>
 </div>
 
 <h2>1. What the app asks for</h2>
@@ -261,8 +284,9 @@ apps cannot read.</p>
 
 <ul>
   <li>There is <strong>no server</strong> operated by the developer.</li>
-  <li>The app contains <strong>no networking code</strong> that sends your data anywhere.</li>
-  <li>It uses <strong>no analytics, advertising, or tracking</strong> tools.</li>
+  <li>The only thing the app sends over the internet goes to <strong>one subscription
+      tool (RevenueCat)</strong>, and it never includes what you enter (see section 5).</li>
+  <li>It uses <strong>no advertising or tracking</strong> tools.</li>
   <li>As a result, the developer <strong>cannot see</strong> anything you enter.</li>
 </ul>
 
@@ -290,16 +314,35 @@ apps cannot read.</p>
 <p>Until you delete it. The developer holds no copy.</p>
 
 <ul>
-  <li><strong>Settings › Clear today's log</strong> — removes logged drinks only.</li>
+  <li><strong>Settings › Clear the log</strong> — removes every logged drink. Your profile stays.</li>
   <li><strong>Settings › Erase everything</strong> — removes your profile, log,
-      and settings, and returns you to onboarding. <strong>This cannot be undone.</strong></li>
+      and detailed-logging entries, and returns you to onboarding. Only your language and theme choices remain. <strong>This cannot be undone.</strong></li>
   <li><strong>Delete the app</strong> — iOS removes the app's storage with it.</li>
 </ul>
 
 <h2>5. Sharing</h2>
 
-<p><strong>None.</strong> No third-party sharing, no processors, no
-international transfers — there is no server to send anything to.</p>
+<p><strong>What you enter is never shared with anyone.</strong> There is no
+third-party sharing. To manage subscriptions, processing is <strong>outsourced as
+described below, which involves a transfer to the United States.</strong></p>
+
+<h3>Processor and international transfer</h3>
+
+<table>
+  <tr><th>Recipient</th><td>RevenueCat, Inc. (privacy@revenuecat.com)</td></tr>
+  <tr><th>Country</th><td>United States</td></tr>
+  <tr><th>Data</th><td>An anonymous identifier created by the app; device and app details (iOS version,
+      app version, country and language settings); IP address; purchase history (product, price,
+      currency, purchase time, transaction ID)</td></tr>
+  <tr><th>Purpose</th><td>Checking subscription status, keeping purchase records, revenue statistics</td></tr>
+  <tr><th>When and how</th><td>When the app launches and when a subscription is bought or renewed, over encrypted connections (HTTPS)</td></tr>
+  <tr><th>Retention</th><td>Kept while you use the service; deleted without delay on request.</td></tr>
+</table>
+
+<p>Your weight, health answers, drink log, name, and anything else you enter are
+<strong>not part of this transfer.</strong> If you do not want it, you can stop using or
+delete the app. RevenueCat's processing is governed by the
+<a href="https://www.revenuecat.com/privacy/">RevenueCat Privacy Policy</a>.</p>
 
 <h3>Payments are handled by Apple</h3>
 
@@ -322,11 +365,16 @@ these yourself, immediately:</p>
   <li><strong>Deletion and restriction</strong> — "Erase everything" in Settings, or delete the app.</li>
 </ul>
 
+<p>To access or delete the anonymous identifier and purchase records sent to RevenueCat,
+email the address below and it will be handled without delay.</p>
+
 <h2>7. Safeguards</h2>
 
 <ul>
-  <li>The strongest safeguard is <strong>not building a collection path</strong> —
+  <li>For what you enter, the strongest safeguard is <strong>not building a collection path</strong> —
       data that never leaves cannot leak.</li>
+  <li>What goes to RevenueCat is limited to an anonymous identifier and purchase records,
+      sent only over encrypted connections (HTTPS).</li>
   <li>Storage sits inside the iOS app sandbox, which other apps cannot reach.</li>
   <li>Protection of the device itself relies on iOS lock and encryption.
       Keeping a device passcode enabled is recommended.</li>
@@ -341,7 +389,7 @@ an adult basis and are not appropriate for children or adolescents.</p>
 <h2>9. Changes</h2>
 
 <p>If the app changes in a way that makes this policy inaccurate, this page is
-updated and the effective date changed. <strong>If data ever begins to leave
+updated and the effective date changed. <strong>If anything you enter ever begins to leave
 the device, the app will say so and ask for consent first.</strong></p>
 
 <h2>10. Contact</h2>
